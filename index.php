@@ -37,9 +37,9 @@ $audience->create();
   $customAudienceId = 6082751342528;
   
 
- /* if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
-   $fname = $_POST['contact']['first_name'];
+  /* $fname = $_POST['contact']['first_name'];
    $lname = $_POST['contact']['last_name'];
    $email = $_POST['contact']['email'];
    $users = array(
