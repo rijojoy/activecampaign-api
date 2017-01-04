@@ -37,7 +37,7 @@ $audience->create();
   $customAudienceId = 6082751342528;
   
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+ /* if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
    $fname = $_POST['contact']['first_name'];
    $lname = $_POST['contact']['last_name'];
@@ -56,7 +56,7 @@ $schema = array(
 $audience = new CustomAudienceMultiKey($customAudienceId);
 
 $audience->addUsers($users, $schema);
-
+*/
     $data = print_r($_POST, 1);
     
     $fd = @fopen("webhooks.log", "a");
