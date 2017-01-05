@@ -43,13 +43,13 @@ $audience->create();
    $lname = $_POST['contact']['last_name'];
    $email = $_POST['contact']['email'];
    $users = array(
-    array($fname, $lname, $email)
+    array($email)
    
   );
-
+                 // $fname, $lname,
 $schema = array(
-  CustomAudienceMultikeySchemaFields::FIRST_NAME,
-  CustomAudienceMultikeySchemaFields::LAST_NAME,
+ // CustomAudienceMultikeySchemaFields::FIRST_NAME,
+ // CustomAudienceMultikeySchemaFields::LAST_NAME,
   CustomAudienceMultikeySchemaFields::EMAIL,
 );
 
@@ -57,7 +57,7 @@ $audience = new CustomAudienceMultiKey($customAudienceId);
 
 $audience->addUsers($users, $schema);
 
-    $data = print_r($_POST, 1);
+    $data = print_r($_GET, 1);
     
     $fd = @fopen("webhooks.log", "a");
     fwrite($fd, $data);
