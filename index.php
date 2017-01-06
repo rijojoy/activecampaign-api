@@ -42,26 +42,44 @@ $audience->create();
     fwrite($fd, $data);
     fclose($fd);
     
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if ($_SERVER["REQUEST_METHOD"] == "POST") 
+  {
   
-   $fname = $_POST['contact']['first_name'];
-   $lname = $_POST['contact']['last_name'];
+   $type = isset($_GET['type'])?$_GET['type']:'';
+   //$fname = $_POST['contact']['first_name'];
+   //$lname = $_POST['contact']['last_name'];
    $email = $_POST['contact']['email'];
-   $users = array(
-    array($email)
-   
-  );
-                 // $fname, $lname,
-$schema = array(
- // CustomAudienceMultikeySchemaFields::FIRST_NAME,
- // CustomAudienceMultikeySchemaFields::LAST_NAME,
-  CustomAudienceMultikeySchemaFields::EMAIL,
-);
 
-$audience = new CustomAudienceMultiKey($customAudienceId);
+   switch($type)
+   {
+     case "delete":
+     $emails = array(
+                $email,
+              );
 
-$audience->addUsers($users, $schema);
+     $audience = new CustomAudience($customAudienceId);
 
+     $audience->removeUsers($emails, CustomAudienceTypes::EMAIL);
+     break;
+     
+     default:
+     $users = array(
+      array($email)
+     
+      );
+                   // $fname, $lname,
+      $schema = array(
+       // CustomAudienceMultikeySchemaFields::FIRST_NAME,
+       // CustomAudienceMultikeySchemaFields::LAST_NAME,
+        CustomAudienceMultikeySchemaFields::EMAIL,
+      );
+
+     $audience = new CustomAudienceMultiKey($customAudienceId);
+     $audience->addUsers($users, $schema);
+
+
+   }
+  
    
   }
 
