@@ -34,8 +34,7 @@ $audience->create();
 */
 
   // Add Users to custom audience
-  $customAudienceId = 6082751342528;
-  
+    $customAudienceId = 6082751342528;
     $data = print_r($_GET, 1);
     
     $fd = @fopen("webhooks.log", "a");
@@ -49,30 +48,31 @@ $audience->create();
    //$fname = $_POST['contact']['first_name'];
    //$lname = $_POST['contact']['last_name'];
    $email = $_POST['contact']['email'];
+   $schema = array(
+       // CustomAudienceMultikeySchemaFields::FIRST_NAME,
+       // CustomAudienceMultikeySchemaFields::LAST_NAME,
+        CustomAudienceMultikeySchemaFields::EMAIL,
+      );
 
    switch($type)
    {
      case "delete":
-     $emails = array(
-                $email,
+     $users = array(
+                 array($email),
               );
 
-     $audience = new CustomAudience($customAudienceId);
+     $audience = new CustomAudienceMultiKey($customAudienceId);
 
-     $audience->removeUsers($emails, CustomAudienceTypes::EMAIL);
+     $audience->removeUsers($users, $schema);
      break;
-     
+
      default:
      $users = array(
       array($email)
      
       );
                    // $fname, $lname,
-      $schema = array(
-       // CustomAudienceMultikeySchemaFields::FIRST_NAME,
-       // CustomAudienceMultikeySchemaFields::LAST_NAME,
-        CustomAudienceMultikeySchemaFields::EMAIL,
-      );
+     
 
      $audience = new CustomAudienceMultiKey($customAudienceId);
      $audience->addUsers($users, $schema);
