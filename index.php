@@ -36,7 +36,7 @@ $audience->create();
   // Add Users to custom audience
   $customAudienceId = 6082751342528;
   
-    $data = print_r($_SERVER, 1);
+    $data = print_r($_GET, 1);
     
     $fd = @fopen("webhooks.log", "a");
     fwrite($fd, $data);
