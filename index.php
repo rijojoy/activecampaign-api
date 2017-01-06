@@ -57,7 +57,7 @@ $audience = new CustomAudienceMultiKey($customAudienceId);
 
 $audience->addUsers($users, $schema);
 
-    $data = print_r($_GET, 1);
+    $data = print_r($_SERVER, 1);
     
     $fd = @fopen("webhooks.log", "a");
     fwrite($fd, $data);
