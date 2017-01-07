@@ -16,7 +16,7 @@
   Api::init(
     '1796895563897187', // App ID
     'a3c242e4a28b11ff32e0c724bef19769', // App Secret
-    'EAAZAiRFnI2WMBAKw8VoKai802coJDPngHXb6gtQ0YlqBJZB7mg7IqpEVuc8On7qsXTibbvZCA59NtTZBMBzaP2wUm4vDuS9ZC4xWnGeqKzmRFcEblOqcPMYaPcLXHn44d3zMCn6d0R6Sm9fL44hYj7yq1tE7Fl0scilZBCHZCCb4wZDZD' // Your user access token
+    'EAAZAiRFnI2WMBALXiEDZBnZAL1U5tcgOu6giZC8g2iVANuqUEOscyjYK7FaSPuq0p7ZB4GEbCIh5bogxa1BG587RvyxDY1qSLYBajcvs4ZCxoxEKnpNR28ln9UaI6ciMAMPZCqSslFFhhF1uypYZB0MxlIE7H3638pwZD' // Your user access token
   );
  /*
      // Create Custom Audience Group
@@ -34,13 +34,13 @@ $audience->create();
 */
 
   // Add Users to custom audience
-    $customAudienceId = 6082751342528;
+    $customAudienceId = $_GET['audience_id'];//6082751342528;
     $data = print_r($_GET, 1);
     
     $fd = @fopen("webhooks.log", "a");
     fwrite($fd, $data);
     fclose($fd);
-   //$_POST['contact']['email'] = 'rijotest14@test.com'; 
+  $_POST['contact']['email'] = 'rijotest141@test.com'; 
   if ($_SERVER["REQUEST_METHOD"] == "POST") 
   {
   
@@ -56,6 +56,19 @@ $audience->create();
 
    switch($type)
    {
+     
+     case "add":
+     $users = array(
+      array($email)
+     
+      );
+                   // $fname, $lname,
+     
+
+     $audience = new CustomAudienceMultiKey($customAudienceId);
+     $audience->addUsers($users, $schema);
+     break;
+
      case "delete":
      $users = array(
                  array($email),
@@ -66,17 +79,7 @@ $audience->create();
      $audience->removeUsers($users, $schema);
      break;
 
-     default:
-     $users = array(
-      array($email)
-     
-      );
-                   // $fname, $lname,
-     
-
-     $audience = new CustomAudienceMultiKey($customAudienceId);
-     $audience->addUsers($users, $schema);
-
+    
 
    }
   
